@@ -10,26 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_25_133750) do
+ActiveRecord::Schema.define(version: 2019_06_25_144308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "chat_threads", force: :cascade do |t|
+  create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_chat_threads_on_user_id"
+    t.index ["restaurant_id"], name: "index_favorites_on_restaurant_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "content"
     t.bigint "user_id"
-    t.bigint "chat_thread_id"
+    t.bigint "restaurant_id"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["chat_thread_id"], name: "index_messages_on_chat_thread_id"
+    t.index ["restaurant_id"], name: "index_messages_on_restaurant_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,7 +46,8 @@ ActiveRecord::Schema.define(version: 2019_06_25_133750) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "chat_threads", "users"
-  add_foreign_key "messages", "chat_threads"
+  add_foreign_key "favorites", "restaurants"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "messages", "restaurants"
   add_foreign_key "messages", "users"
 end
