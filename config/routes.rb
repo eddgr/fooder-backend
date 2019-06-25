@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
-  get '/users', to: 'users#index'
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index]
+      resources :restaurants, only: [:index, :show]
+      resources :messages, only: [:create]
+    end
+  end
+
   mount ActionCable.server => 'cable'
 end
