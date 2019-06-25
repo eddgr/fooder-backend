@@ -3,8 +3,14 @@ class Api::V1::MessagesController < ApplicationController
     message = Message.new(message_params)
 
     if message.save
-      ActionCable.server.broadcast("chat_channel", message.content)
-      
+      ActionCable.server.broadcast("chat_channel", {
+        type: 'SEND_MESSAGE', payload: {
+          message: message, 
+          user: message.user,
+          restaurant: message.restaurant
+        }
+      })
+
       render json: message
     end
   end
