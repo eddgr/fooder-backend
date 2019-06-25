@@ -5,9 +5,9 @@ class Api::V1::MessagesController < ApplicationController
     if message.save
       ActionCable.server.broadcast("chat_channel", {
         type: 'SEND_MESSAGE', payload: {
-          message: message, 
-          user: message.user,
-          restaurant: message.restaurant
+          id: message.id,
+          username: message.user.name,
+          content: message.content
         }
       })
 
