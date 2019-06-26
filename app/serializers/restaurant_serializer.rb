@@ -1,5 +1,5 @@
 class RestaurantSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :fsq_id, :location, :categories
 
   has_many :messages do
     object.messages.map do |message|
