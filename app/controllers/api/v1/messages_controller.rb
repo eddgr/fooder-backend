@@ -1,13 +1,15 @@
 class Api::V1::MessagesController < ApplicationController
+
+  # CREATE
   def create
     message = Message.new(message_params)
 
     if message.save
       ActionCable.server.broadcast("chat_channel", {
         type: 'SEND_MESSAGE', payload: {
-          message: message, 
-          user: message.user,
-          restaurant: message.restaurant
+          id: message.id,
+          username: message.user.username,
+          content: message.content
         }
       })
 
@@ -15,6 +17,7 @@ class Api::V1::MessagesController < ApplicationController
     end
   end
 
+  # PRIVATE METHODS
   private
 
   def message_params
