@@ -1,9 +1,16 @@
 class Api::V1::UsersController < ApplicationController
+  # READ
   def index
     users = User.all
-
-    ActionCable.server.broadcast("chat_channel", users)
-
     render json: users
+  end
+
+  # CREATE
+
+  # PRIVATE METHODS
+  private
+
+  def user_params
+    params.permit(:username, :password)
   end
 end

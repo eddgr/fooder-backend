@@ -5,7 +5,7 @@ class RestaurantSerializer < ActiveModel::Serializer
     object.messages.map do |message|
       message = {
         id: message.id,
-        username: message.user.name,
+        username: message.user.username,
         content: message.content,
         created_at: message.created_at
       }

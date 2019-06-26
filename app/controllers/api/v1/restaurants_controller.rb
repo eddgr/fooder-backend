@@ -1,4 +1,6 @@
 class Api::V1::RestaurantsController < ApplicationController
+
+  # READ
   def index
     restaurants = Restaurant.all
     render json: restaurants
