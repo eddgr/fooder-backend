@@ -3,10 +3,11 @@ class Api::V1::UsersController < ApplicationController
   def profile
     render json: logged_in_user
   end
-  # def index
-  #   users = User.all
-  #   render json: users
-  # end
+
+  def index
+    users = User.all
+    render json: users
+  end
 
   # CREATE
   def create
