@@ -5,7 +5,9 @@ class Api::V1::MessagesController < ApplicationController
     message = Message.new(message_params)
 
     if message.save
-      ActionCable.server.broadcast("chat_channel", {
+      chat = Restaurant.find(params[:restaurant_id])
+
+      ChatThreadChannel.broadcast_to(chat, {
         type: 'SEND_MESSAGE', payload: {
           id: message.id,
           username: message.user.username,
