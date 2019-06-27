@@ -9,7 +9,7 @@ class Api::V1::AuthController < ApplicationController
     end
 
     if is_authenticated
-      render json: { token: encode_token(user), id: user.id, username: user.username }
+      render json: { token: encode_token(user), id: user.id, username: user.username, show_likes: user.show_likes, show_dislikes: user.show_dislikes }
     else
       render json: { error: "Wrong username or password" }
     end

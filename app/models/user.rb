@@ -20,6 +20,7 @@ class User < ApplicationRecord
       }
     end
   end
+  
   def show_likes
     liked = self.favorites.find_all do |favorite|
       favorite.liked === true
