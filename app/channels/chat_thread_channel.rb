@@ -1,6 +1,7 @@
 class ChatThreadChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "chat_channel"
+    chat = Restaurant.find(params["restaurant_id"])
+    stream_for chat
   end
 
   def unsubscribed
