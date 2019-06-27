@@ -14,13 +14,14 @@ class User < ApplicationRecord
         id: fav.restaurant_id,
         name: fav.restaurant.name,
         categories: fav.restaurant.categories,
+        favorites: fav.restaurant.favorites.map {|f| f.id},
         fsq_id: fav.restaurant.fsq_id,
         location: fav.restaurant.location,
         messages: fav.restaurant.messages
       }
     end
   end
-  
+
   def show_likes
     liked = self.favorites.find_all do |favorite|
       favorite.liked === true
