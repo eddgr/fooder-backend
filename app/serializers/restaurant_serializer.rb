@@ -1,6 +1,17 @@
 class RestaurantSerializer < ActiveModel::Serializer
   attributes :id, :name, :fsq_id, :location, :categories
 
+  has_many :favorites do
+    object.favorites.map do |favorite|
+      # favorite = {
+        # user_id: favorite.user.id,
+        favorite.user.id
+        # username: favorite.user.username,
+        # liked: favorite.liked
+      # }
+    end
+  end
+
   has_many :messages do
     object.messages.map do |message|
       message = {
