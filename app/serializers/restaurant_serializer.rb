@@ -5,7 +5,9 @@ class RestaurantSerializer < ActiveModel::Serializer
     object.favorites.map do |favorite|
       # favorite = {
         # user_id: favorite.user.id,
+      if favorite.liked
         favorite.user.id
+      end
         # username: favorite.user.username,
         # liked: favorite.liked
       # }

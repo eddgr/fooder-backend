@@ -14,7 +14,11 @@ class User < ApplicationRecord
         id: fav.restaurant_id,
         name: fav.restaurant.name,
         categories: fav.restaurant.categories,
-        favorites: fav.restaurant.favorites.map {|f| f.id},
+        favorites: fav.restaurant.favorites.map do |f| 
+          if f.liked
+            f.id
+          end
+        end,
         fsq_id: fav.restaurant.fsq_id,
         location: fav.restaurant.location,
         messages: fav.restaurant.messages
