@@ -14,14 +14,24 @@ class User < ApplicationRecord
         id: fav.restaurant_id,
         name: fav.restaurant.name,
         categories: fav.restaurant.categories,
-        favorites: fav.restaurant.favorites.map do |f| 
+        favorites: fav.restaurant.favorites.map do |f|
           if f.liked
             f.id
           end
         end,
         fsq_id: fav.restaurant.fsq_id,
         location: fav.restaurant.location,
-        messages: fav.restaurant.messages
+        messages: fav.restaurant.messages.map do |m|
+          message = {
+            id: m.id,
+            created_at: m.created_at,
+            updated_at: m.updated_at,
+            restaurant_id: m.restaurant_id,
+            user_id: m.user_id,
+            user_name: m.user.username,
+            content: m.content
+          }
+        end
       }
     end
   end
