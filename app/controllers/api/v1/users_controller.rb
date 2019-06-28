@@ -1,9 +1,5 @@
 class Api::V1::UsersController < ApplicationController
   # READ
-  def profile
-    render json: logged_in_user
-  end
-
   def index
     users = User.all
     render json: users
@@ -20,10 +16,19 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  # UPDATE
+  def profile
+    logged_in_user.update(lat: params[:lat], long: params[:long])
+
+    if logged_in_user.save
+      render json: logged_in_user
+    end
+  end
+
   # PRIVATE METHODS
   private
 
   def user_params
-    params.permit(:username, :password)
+    params.permit(:username, :password, :lat, :long)
   end
 end

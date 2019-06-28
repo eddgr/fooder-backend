@@ -23,6 +23,8 @@ fetch_json.each do |data|
     name: data["venue"]["name"],
     # contact: data["venue"]["contact"]["formattedPhone"],
     location: data["venue"]["location"]["formattedAddress"].join(", "),
+    lat: data["venue"]["location"]["lat"],
+    long: data["venue"]["location"]["lng"],
     categories: data["venue"]["categories"][0]["pluralName"]
     # price: data["venue"]["price"]["message"],
     # menu: data["venue"]["menu"]["mobileUrl"],
