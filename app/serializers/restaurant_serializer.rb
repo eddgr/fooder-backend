@@ -1,5 +1,5 @@
 class RestaurantSerializer < ActiveModel::Serializer
-  attributes :id, :name, :fsq_id, :location, :categories
+  attributes :id, :name, :fsq_id, :location, :categories, :lat, :long
 
   has_many :favorites do
     object.favorites.map do |favorite|
