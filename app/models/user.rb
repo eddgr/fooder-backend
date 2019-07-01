@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true, length: { minimum: 3 }
+  # validates :password, length: { in: 5..20 }
+
   has_secure_password
 
   has_many :favorites
