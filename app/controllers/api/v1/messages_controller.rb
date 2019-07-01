@@ -11,7 +11,11 @@ class Api::V1::MessagesController < ApplicationController
         type: 'SEND_MESSAGE', payload: {
           id: message.id,
           username: message.user.username,
-          content: message.content
+          content: message.content,
+          created_at: message.created_at,
+          updated_at: message.updated_at,
+          restaurant_id: params[:restaurant_id],
+          user_id: message.user.id
         }
       })
 
