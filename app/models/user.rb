@@ -5,7 +5,6 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :restaurants, through: :favorites
   has_many :messages
-  # has_many :restaurants, through: :messages
 
   # HELPER METHODS
   def mapRestaurant(array)
@@ -21,6 +20,7 @@ class User < ApplicationRecord
           end
         end,
         fsq_id: fav.restaurant.fsq_id,
+        tip_photo: fav.restaurant.tip_photo,
         location: fav.restaurant.location,
         messages: fav.restaurant.messages.map do |m|
           message = {
