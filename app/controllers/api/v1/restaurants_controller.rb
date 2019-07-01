@@ -1,22 +1,8 @@
 class Api::V1::RestaurantsController < ApplicationController
-
+  before_action :logged_in_user
+  
   # READ
   def index
-    # if logged_in_user
-    #   restaurants = []
-    #
-    #   Restaurant.all.each do |restaurant|
-    #     restaurant.users.each do |user|
-    #       if user.id != logged_in_user.id
-    #         restaurants << restaurant
-    #       end
-    #     end
-    #   end
-    #   byebug
-    #
-    #   render json: restaurants
-    # end
-    # logged_in_user.favorites
     restaurants = Restaurant.all
     render json: restaurants
   end

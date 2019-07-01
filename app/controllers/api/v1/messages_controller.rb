@@ -1,4 +1,5 @@
 class Api::V1::MessagesController < ApplicationController
+  before_action :logged_in_user
 
   # CREATE
   def create

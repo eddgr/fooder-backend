@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :logged_in_user, except: [:create]
+  
   # READ
   def index
     users = User.all
