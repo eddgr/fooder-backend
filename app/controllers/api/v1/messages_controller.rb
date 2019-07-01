@@ -19,6 +19,8 @@ class Api::V1::MessagesController < ApplicationController
         }
       })
 
+      chat.update(updated_at: message.updated_at)
+
       render json: message
     end
   end

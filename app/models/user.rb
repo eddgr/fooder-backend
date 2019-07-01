@@ -14,6 +14,7 @@ class User < ApplicationRecord
         id: fav.restaurant_id,
         name: fav.restaurant.name,
         categories: fav.restaurant.categories,
+        updated_at: fav.restaurant.updated_at,
         favorites: fav.restaurant.favorites.map do |f|
           if f.liked
             f.id
