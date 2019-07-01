@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  before_action :logged_in_user, except: [:create]
+
   # READ
   def index
     users = User.all
@@ -10,7 +12,9 @@ class Api::V1::UsersController < ApplicationController
     user = User.create(user_params)
 
     if user.valid?
-      render json: { token: encode_token(user), id: user.id, username: user.username }
+      user.update(lat: params[:lat], long: params[:long])
+      
+      render json: { token: encode_token(user), id: user.id, username: user.username, lat: user.lat, long: user.long }
     else
       render json: { error: "Username already taken" }
     end

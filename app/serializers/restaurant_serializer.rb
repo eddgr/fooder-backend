@@ -1,16 +1,11 @@
 class RestaurantSerializer < ActiveModel::Serializer
-  attributes :id, :name, :fsq_id, :location, :categories, :lat, :long, :updated_at
+  attributes :id, :name, :fsq_id, :location, :categories, :lat, :long, :updated_at, :contact, :price, :menu, :hours, :tip_text, :tip_photo
 
   has_many :favorites do
     object.favorites.map do |favorite|
-      # favorite = {
-        # user_id: favorite.user.id,
       if favorite.liked
         favorite.user.id
       end
-        # username: favorite.user.username,
-        # liked: favorite.liked
-      # }
     end
   end
 
