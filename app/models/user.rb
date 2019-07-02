@@ -20,7 +20,8 @@ class User < ApplicationRecord
           if f.liked
             f.id
           end
-        end,
+        end.reject(&:nil?),
+        dislikes: fav.restaurant.dislikes,
         fsq_id: fav.restaurant.fsq_id,
         tip_photo: fav.restaurant.tip_photo,
         location: fav.restaurant.location,
