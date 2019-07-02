@@ -8,6 +8,12 @@ class Api::V1::FavoritesController < ApplicationController
     render json: liked
   end
 
+  # DESTROY
+  def destroy
+    liked = Favorite.find_by(fav_params)
+    liked.delete
+  end
+
   # PRIVATE METHODS
   private
 
