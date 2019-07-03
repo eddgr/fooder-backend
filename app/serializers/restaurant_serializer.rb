@@ -5,7 +5,7 @@ class RestaurantSerializer < ActiveModel::Serializer
   has_many :favorites do
     object.favorites.map do |favorite|
       if favorite.liked
-          favorite.user.id
+        favorite.user.id
       end
     end.reject(&:nil?)
   end
