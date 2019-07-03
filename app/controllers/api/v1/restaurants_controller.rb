@@ -1,5 +1,5 @@
 class Api::V1::RestaurantsController < ApplicationController
-  # before_action :logged_in_user
+  before_action :logged_in_user
 
   # READ
   def index

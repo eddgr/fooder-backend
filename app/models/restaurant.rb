@@ -26,7 +26,6 @@ class Restaurant < ApplicationRecord
 
     if fetch_json["hours"]
       self.update(
-        price: fetch_json["price"]["currency"],
         tip_text: fetch_json["tips"]["groups"][0]["items"][0]["text"],
         tip_photo: "#{fetch_json["bestPhoto"]["prefix"]}500x500#{fetch_json["bestPhoto"]["suffix"]}",
         hours: [

@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :logged_in_user, except: [:create]
+  before_action :logged_in_user, except: [:create, :profile]
 
   # READ
   def index
@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
 
     if user.valid?
       user.update(lat: params[:lat], long: params[:long])
-      
+
       render json: { token: encode_token(user), id: user.id, username: user.username, lat: user.lat, long: user.long }
     else
       render json: { error: "Username already taken" }
