@@ -6,6 +6,7 @@ class Restaurant < ApplicationRecord
   has_many :users, through: :favorites
   # has_many :users, through: :messages
 
+  # INSTANCE METHODS
   def dislikes
     self.favorites.map do |fav|
       # byebug
@@ -43,4 +44,22 @@ class Restaurant < ApplicationRecord
     # take fetch response then update the Restaurant object with missing variables:
     # contact, price, menu, hours, tip_text, tip_photo
   end
+
+  # CLASS METHODS
+  # def self.find_venues(lat, long)
+  #   fetch = RestClient.get("https://api.foursquare.com/v2/venues/explore?section=food&ll=#{lat},#{long}&client_id=#{ENV["FSQ_ID"]}&client_secret=#{ENV["FSQ_SECRET"]}&v=#{ENV["FSQ_VERSION"]}&radius=100000")
+  #
+  #   fetch_json = JSON.parse(fetch)["response"]["groups"][0]["items"]
+  #
+  #   fetch_json.each do |data|
+  #     Restaurant.find_or_create_by(
+  #       fsq_id: data["venue"]["id"],
+  #       name: data["venue"]["name"],
+  #       location: data["venue"]["location"]["formattedAddress"].join(", "),
+  #       lat: data["venue"]["location"]["lat"],
+  #       long: data["venue"]["location"]["lng"],
+  #       categories: data["venue"]["categories"][0]["pluralName"]
+  #     )
+  #   end
+  # end
 end

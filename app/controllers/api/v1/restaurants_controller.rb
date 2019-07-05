@@ -17,4 +17,13 @@ class Api::V1::RestaurantsController < ApplicationController
     render json: restaurant
   end
 
+  # CREATE
+  # def create
+  #   Restaurant.find_venues(params[:lat], params[:long])
+  #
+  #   restaurants = Restaurant.all
+  #
+  #   render json: restaurants
+  # end
+
 end
