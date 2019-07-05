@@ -6,6 +6,6 @@ class ChatThreadChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
-    raise "?"
+    # raise "?"
   end
 end
