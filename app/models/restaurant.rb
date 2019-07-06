@@ -17,10 +17,6 @@ class Restaurant < ApplicationRecord
   end
 
   def more_details
-    # if self.tip_photo === nil
-
-    # https://api.foursquare.com/v2/venues/537b5258498e262a54b47216&client_id=GFRYXUKB53LGZM1BJPEEECBU2SHKIDWBHBFVREJ1TFT35RUP&client_secret=KTLX5QWCKTJ0MZFRYKSQBKHZMYI2SC1BWKJ5ZZMC5KM4PICW&v=20190626
-
     fetch = RestClient.get("https://api.foursquare.com/v2/venues/#{self.fsq_id}?&client_id=#{ENV["FSQ_ID"]}&client_secret=#{ENV["FSQ_SECRET"]}&v=#{ENV["FSQ_VERSION"]}")
 
     fetch_json = JSON.parse(fetch)["response"]["venue"]
@@ -46,20 +42,25 @@ class Restaurant < ApplicationRecord
   end
 
   # CLASS METHODS
-  # def self.find_venues(lat, long)
-  #   fetch = RestClient.get("https://api.foursquare.com/v2/venues/explore?section=food&ll=#{lat},#{long}&client_id=#{ENV["FSQ_ID"]}&client_secret=#{ENV["FSQ_SECRET"]}&v=#{ENV["FSQ_VERSION"]}&radius=100000")
-  #
-  #   fetch_json = JSON.parse(fetch)["response"]["groups"][0]["items"]
-  #
-  #   fetch_json.each do |data|
-  #     Restaurant.find_or_create_by(
-  #       fsq_id: data["venue"]["id"],
-  #       name: data["venue"]["name"],
-  #       location: data["venue"]["location"]["formattedAddress"].join(", "),
-  #       lat: data["venue"]["location"]["lat"],
-  #       long: data["venue"]["location"]["lng"],
-  #       categories: data["venue"]["categories"][0]["pluralName"]
-  #     )
-  #   end
-  # end
+  def self.find_venues(lat, long)
+    fetch = RestClient.get("https://api.foursquare.com/v2/venues/explore?section=food&ll=#{lat},#{long}&client_id=#{ENV["FSQ_ID"]}&client_secret=#{ENV["FSQ_SECRET"]}&v=#{ENV["FSQ_VERSION"]}&radius=100000")
+
+    fetch_json = JSON.parse(fetch)["response"]["groups"][0]["items"]
+
+    fetch_json.each do |data|
+      # check if venue already exist in database by fsq_id
+      if !Restaurant.find_by(fsq_id: data["venue"]["id"])
+        # create new venue if fsq_id not found
+        Restaurant.find_or_create_by(
+          fsq_id: data["venue"]["id"],
+          name: data["venue"]["name"],
+          location: data["venue"]["location"]["formattedAddress"].join(", "),
+          lat: data["venue"]["location"]["lat"],
+          long: data["venue"]["location"]["lng"],
+          categories: data["venue"]["categories"][0]["pluralName"]
+        )
+      end
+    end
+  end 
+
 end
