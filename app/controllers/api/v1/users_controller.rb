@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
 
       render json: { token: encode_token(user), id: user.id, username: user.username, lat: user.lat, long: user.long }
     else
-      render json: { error: user.errors.full_messages }
+      render json: { error: "Username already taken or invalid" }
     end
   end
 
