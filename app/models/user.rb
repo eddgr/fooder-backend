@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :username, uniqueness: true, length: { minimum: 3 }, format: { without: /\s/, message: 'Must contain no spaces.' }
+  validates :username, uniqueness: {true, message: 'Username already taken'}, length: { minimum: 3 }, format: { without: /\s/, message: 'Must contain no spaces' }
   # validates :password, length: { in: 5..20 }
 
   has_secure_password
