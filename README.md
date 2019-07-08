@@ -1,24 +1,5 @@
-# README
+# Fooder Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails API backend for Fooder.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Fooder: https://www.github.com/eddgr/fooder-frontend
