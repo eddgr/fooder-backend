@@ -51,4 +51,4 @@ gem "jwt", "~> 2.2"
 
 gem "rest-client", "~> 2.0"
 
-gem "geocoder", "~> 1.5"
+gem "geocoder", "~> 1.6"
